@@ -11,6 +11,11 @@ public class Account {
         this.money = money;
     }
 
+    /**
+     * Method adds money to account
+     * @param amount shows how much money need to add to account
+     * @throws InvalidAmountException if amount is negative
+     */
     public void addMoney(int amount) throws InvalidAmountException {
         if (amount >= 0) {
             money += amount;
@@ -19,7 +24,12 @@ public class Account {
         }
     }
 
-    public void subtractMoney(int amount) throws InvalidAmountException {
+    /**
+     * Method subtracts money from account
+     * @param amount shows how much money need to subtract from account
+     * @throws InvalidAmountException if amount is negative or if money doesn't enough to subtract
+     */
+     public void subtractMoney(int amount) throws InvalidAmountException {
 
         if(amount > money) {
             throw new InvalidAmountException("Not enough money on account");
