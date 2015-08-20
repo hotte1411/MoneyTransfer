@@ -1,6 +1,9 @@
 package com.vk.hotte;
 
-
+/**
+ *  This class describes usual bank account with name and amount of money.
+ *
+ */
 public class Account {
 
     private String name;
