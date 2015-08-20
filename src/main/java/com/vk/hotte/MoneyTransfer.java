@@ -9,32 +9,6 @@ import java.util.Random;
  */
 public class MoneyTransfer {
 
-    public static void main(String[] args) {
-        final Account sender = new Account("sender", 10000);
-        final Account recipient = new Account("recipient", 0);
-        final MoneyTransfer transfer = new MoneyTransfer();
-
-        Runnable runnable1 = new Runnable(){
-
-            public void run() {
-                while (sender.getMoney() > 0) {
-                    try {
-                        int rand = new Random().nextInt(3) + 1;
-                        transfer.transfer(sender, recipient, rand);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-
-                }
-            }
-        };
-
-        Thread thread1 = new Thread(runnable1, "first");
-        Thread thread2 = new Thread(runnable1, "second");
-        thread1.start();
-        thread2.start();
-    }
-
     /**
      * Method transfers money from one account to second
      *
@@ -49,11 +23,13 @@ public class MoneyTransfer {
 
         int sum = getSum(sender, recipient);
         sender.subtractMoney(amount);
+
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         recipient.addMoney(amount);
 
         System.out.println("[AFTER] " + Thread.currentThread().getName() + ": " +

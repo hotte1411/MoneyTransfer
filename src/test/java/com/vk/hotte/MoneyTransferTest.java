@@ -38,17 +38,13 @@ public class MoneyTransferTest {
         final Account recipient = new Account("recipient", 0);
         final MoneyTransfer transfer = new MoneyTransfer();
 
-        Runnable runnable1 = new Runnable(){
+        Runnable runnable1 = new Runnable() {
 
             public void run() {
                 while (sender.getMoney() > 0) {
-                    try {
-                        int rand = new Random().nextInt(3) + 1;
-                        transfer.transfer(sender, recipient, rand);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-
+                    int rand = new Random().nextInt(3) + 1;
+                    transfer.transfer(sender, recipient, rand);
+                    transfer.transfer(recipient, sender, rand);
                 }
             }
         };
@@ -56,6 +52,6 @@ public class MoneyTransferTest {
         Thread thread1 = new Thread(runnable1, "first");
         Thread thread2 = new Thread(runnable1, "second");
         thread1.start();
-        thread2.start();
+        thread2.run();
     }
 }
